@@ -3,19 +3,31 @@ import Router from "koa-router";
 import logger from "koa-logger";
 import dotenv from "dotenv";
 import { Storage } from "@google-cloud/storage";
-import serviceAccountKey from "./ist-retail-demo-c2e70dfceaa3.json" assert { type: "json" };
 import { connectToDatabase } from "./connect.js";
+import fs from "fs/promises";
 
 dotenv.config();
 const port = process.env.PORT;
+const jsonFilePath = "/utils/serviceAccountKey.json";
 
 const app = new Koa();
 const router = new Router();
 
 app.use(logger());
 
+async function loadJson(filePath) {
+  try {
+    const data = await fs.readFile(process.cwd() + filePath, "utf8");
+    return JSON.parse(data);
+  } catch (error) {
+    console.error("Failed to load and parse JSON file:", error);
+    throw error;
+  }
+}
+
 router.get("/signURLs", async (ctx) => {
   try {
+    const serviceAccountKey = await loadJson(jsonFilePath);
     const storage = new Storage({
       credentials: serviceAccountKey,
     });

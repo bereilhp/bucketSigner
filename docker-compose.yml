@@ -1,0 +1,10 @@
+services:
+  bucket-signer-retail:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: bucket-signer-microservice:latest
+    ports:
+      - "3456:3456"
+    restart: always
+    container_name: bucket-signer-microservice
