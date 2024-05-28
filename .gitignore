@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # SA
-utils/serviceAccountKey.json
+config/serviceAccountKey.json
