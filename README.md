@@ -1,4 +1,4 @@
-# Bucket Signer Microservice for Google Cloud platform
+# Bucket Signer Microservice for Google Cloud Platform using MongoDB
 
 ## Requirements
 
