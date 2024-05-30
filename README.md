@@ -59,7 +59,7 @@ To configure your environment variables properly, follow these steps to create a
     DB_NAME= # The name of your database
     ```
 
-> **Important Notes:** Keep your .env file secure and never commit it to version control.
+> **Important Note:** Keep your .env file secure and never commit it to version control.
 
 ## Running It Locally
 
@@ -81,4 +81,26 @@ To launch the server locally on your machine, follow these simple steps:
    npm start
    ```
 
-## Running it with Docker
+## Running It with Docker
+
+Using Docker to run your application can simplify setup and ensure consistency across different environments. Follow these steps to build the image and run the container:
+
+### Building and Running the Docker Container
+
+1. **Build the Docker Image**: To create the Docker image for your application, use the `make build` command. This command typically executes the necessary `docker build` operations defined in your `Makefile`:
+
+   ```bash
+   make build
+   ```
+
+   > **Important Note:** This command will also create and start the container.
+
+2. **Removing the Docker Image and Container**: If you need to clean up or refresh your Docker environment, you can remove the Docker image and container using:
+
+   ```
+   make clean
+   ```
+
+## The API Architecture
+
+TBD
