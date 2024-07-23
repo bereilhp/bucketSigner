@@ -25,6 +25,12 @@ nvm use
 
 This ensures that you are using the correct version of Node.js as specified in the `.nvmrc` file.
 
+## Python
+
+- **Python 3.11.7**
+
+If you need to install Python, you can download it from the [official website](https://www.python.org/). Installing the correct version ensures compatibility and optimal performance of the code.
+
 ## GCP Service Account Key
 
 TBD
