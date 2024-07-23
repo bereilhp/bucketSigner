@@ -8,7 +8,7 @@ import fs from "fs/promises";
 
 dotenv.config();
 const port = process.env.PORT;
-const jsonFilePath = "/utils/serviceAccountKey.json";
+const jsonFilePath = "/config/serviceAccountKey.json";
 
 const app = new Koa();
 const router = new Router();

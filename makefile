@@ -1,3 +1,9 @@
+git: 
+	@git pull
+	@git add .
+	@git commit -m "$m" #m="your message"
+	@git push 
+	
 build:
 	docker compose up --build -d
 

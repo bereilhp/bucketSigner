@@ -1,3 +1,5 @@
+name: bucket-signer-stack
+
 services:
   bucket-signer-retail:
     build:
