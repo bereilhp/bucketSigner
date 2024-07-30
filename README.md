@@ -1,5 +1,7 @@
 # Bucket Signer Microservice for Google Cloud Platform using MongoDB
 
+The provided microservice is an REST API built using Koa, designed to handle requests for generating signed URLs for files stored in a private Google Cloud Storage (GCS) bucket. Upon receiving a GET request at "/signURLs", it reads the service account key from a JSON file, interacts with the GCS bucket, and then updates the image URLs of corresponding products in a MongoDB collection. The microservice is crucial because the GCS bucket is private; thus, it generates signed URLs that provide temporary access to these files.
+
 ## Requirements
 
 - Node.js
@@ -33,7 +35,21 @@ If you need to install Python, you can download it from the [official website](h
 
 ## GCP Service Account Key
 
-TBD
+For this code, you need to create a Service Account for Google Cloud Platform that is able to sign URLs in a bucket.
+
+### Setting Up the GCP Service Account
+
+Create a Service Account: Follow the [official guide](https://cloud.google.com/iam/docs/service-accounts-create#gcloud) to create a service account in your GCP project.
+
+Assign Roles: Ensure the service account has the necessary roles, such as roles/storage.objectViewer and roles/storage.objectAdmin, to access the bucket and sign URLs.
+
+Generate a Key: Create a JSON key for the service account and download it.
+
+### Adding the Service Account Key
+
+There is a `config/` folder in the root directory of the project where you will place your file.
+
+Add the JSON Key: Place the downloaded JSON key file in the config folder and rename it to serviceAccountKey.json.
 
 ## Set Up the .env File
 
@@ -50,7 +66,7 @@ To configure your environment variables properly, follow these steps to create a
 3.  **Configuring the .env File**: Add the following entries to your .env file. Replace the placeholder values with your specific configurations to ensure the application connects to the appropriate services:
     ```bash
     PORT= # The port on which your server should listen
-    MODB_URI= # Your MongoDB connection URI
+    MONGODB_URI= # Your MongoDB connection URI
     GCP_STORAGE_BUCKET=# Google Cloud Platform storage bucket name
     DB_NAME= # The name of your database
     ```
@@ -99,4 +115,8 @@ Using Docker to run your application can simplify setup and ensure consistency a
 
 ## The API Architecture
 
-TBD
+This API is built using Koa and it only has one GET route called `/signURLs`.
+
+Here is an image of the architecture:
+
+![Architecture Image](img/architecture.png)

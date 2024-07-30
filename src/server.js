@@ -33,7 +33,7 @@ router.get("/signURLs", async (ctx) => {
     });
 
     const bucketName = process.env.GCP_STORAGE_BUCKET;
-    const folderName = "storeProducts/";
+    const folderName = process.env.GCP_BUCKET_FOLDER;
 
     const bucket = storage.bucket(bucketName);
     const [files] = await bucket.getFiles({ prefix: folderName });
