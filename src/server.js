@@ -3,7 +3,7 @@ import Router from "koa-router";
 import logger from "koa-logger";
 import dotenv from "dotenv";
 import { Storage } from "@google-cloud/storage";
-import { connectToDatabase } from "./connect.js";
+import { connectToDatabase, closeDatabase } from "./connect.js";
 import fs from "fs/promises";
 
 dotenv.config();
@@ -26,6 +26,7 @@ async function loadJson(filePath) {
 }
 
 router.get("/signURLs", async (ctx) => {
+  let db;
   try {
     const serviceAccountKey = await loadJson(jsonFilePath);
     const storage = new Storage({
@@ -38,7 +39,7 @@ router.get("/signURLs", async (ctx) => {
     const bucket = storage.bucket(bucketName);
     const [files] = await bucket.getFiles({ prefix: folderName });
 
-    const db = await connectToDatabase();
+    db = await connectToDatabase();
     const collection = db.collection("products");
 
     const updates = await Promise.all(
@@ -73,6 +74,10 @@ router.get("/signURLs", async (ctx) => {
     console.error("Error processing request:", error);
     ctx.body = { error: "Failed to process request" };
     ctx.status = 500;
+  } finally {
+    if (db) {
+      await closeDatabase();
+    }
   }
 });
 

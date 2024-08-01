@@ -24,7 +24,8 @@ export async function connectToDatabase() {
 }
 
 export function closeDatabase() {
-  if (client.isConnected()) {
+  if (client.topology.isConnected()) {
+    console.log("Connection closed successfully to MongoDB Atlas");
     return client.close();
   }
   return Promise.resolve();
