@@ -60,15 +60,13 @@ router.get("/signURLs", async (ctx) => {
           { $set: { "image.url": signedUrl } }
         );
 
-        return updateResult;
+        return { file: file.name, acknowledged: updateResult.acknowledged };
       })
     );
 
-    const results = updates
-      .filter((result) => result !== null)
-      .map((result) => result.matchedCount);
+    const results = updates.filter((result) => result !== null);
 
-    ctx.body = { GeneratedURLsAndUpdatedCollection: true };
+    ctx.body = { GeneratedURLsAndUpdatedCollection: true, results };
     ctx.status = 200;
   } catch (error) {
     console.error("Error processing request:", error);
